@@ -40,4 +40,3 @@ services:
       - ./docker/adminer-servers.php/:/var/www/html/adminer-servers.php
     ports:
       - "8080:80"
-
