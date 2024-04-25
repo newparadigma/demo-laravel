@@ -24,11 +24,10 @@
     docker-compose exec app php artisan key:generate
     ```
 
-5. Запускаем миграции и загрузку фикстур:
+5. Запускаем миграции:
 
     ```bash
     docker-compose exec app php artisan migrate
-    docker-compose exec app php bin/console doctrine:fixtures:load
     ```
 
 ## Руководство
