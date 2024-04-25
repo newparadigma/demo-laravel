@@ -7,6 +7,10 @@ services:
     volumes:
       - ./src:/var/www/html
     command: ash -c "composer install & php-fpm"
+    expose:
+      - "9000"
+    depends_on:
+      - db
   web:
     image: nginx:alpine
     container_name: demo-laravel-web
@@ -31,8 +35,6 @@ services:
       MYSQL_PASSWORD: dbpassword
     expose:
       - "3306"
-    ports:
-      - "3306:3306"
   adminer:
     image: newparadigma/adminer-mysql-ocl
     container_name: demo-laravel-adminer
@@ -40,3 +42,5 @@ services:
       - ./docker/adminer-servers.php/:/var/www/html/adminer-servers.php
     ports:
       - "8080:80"
+    depends_on:
+      - db
