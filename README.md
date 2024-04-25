@@ -36,10 +36,11 @@
 * Ссылка на админер - веб-интерфейс для бд: [localhost:8080](http://localhost:8080)
 
 User
-UserQuiz
-UserQuizQuestionAnswer
 Quiz
-QuizQuestion
 Question
-QuestionAnswer
 Answer
+
+QuizUser
+QuizUserItem
+QuestionQuiz
+AnswerQuestion
