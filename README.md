@@ -34,3 +34,13 @@
 
 * Проект по умолчанию доступен по адресу [localhost](http://localhost)
 * Ссылка на админер - веб-интерфейс для бд: [localhost:8080](http://localhost:8080)
+
+User
+Quiz
+Question
+Answer
+
+QuizUser
+QuizUserItem
+QuestionQuiz
+AnswerQuestion
