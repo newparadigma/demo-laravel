@@ -1,0 +1,46 @@
+services:
+  app:
+    build:
+      context: ./docker
+      dockerfile: app_dockerfile
+    container_name: demo-laravel-app
+    volumes:
+      - ./src:/var/www/html
+    command: ash -c "composer install & php-fpm"
+    expose:
+      - "9000"
+    depends_on:
+      - db
+  web:
+    image: nginx:alpine
+    container_name: demo-laravel-web
+    ports:
+      - "80:80"
+    volumes:
+      - ./docker/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./src:/var/www/html
+    depends_on:
+      - app
+  db:
+    image: mysql:8.3
+    # image: arm64v8/mysql:8.3
+    container_name: demo-laravel-db
+    command: --init-file /data/application/init_mysql.sql
+    volumes:
+      - ./docker/init_mysql.sql:/data/application/init_mysql.sql
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: laravel
+      MYSQL_USER: dbuser
+      MYSQL_PASSWORD: dbpassword
+    expose:
+      - "3306"
+  adminer:
+    image: newparadigma/adminer-mysql-ocl
+    container_name: demo-laravel-adminer
+    volumes:
+      - ./docker/adminer-servers.php/:/var/www/html/adminer-servers.php
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
